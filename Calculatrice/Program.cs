@@ -23,7 +23,7 @@ namespace Calculatrice
                     CalculatriceServices cals2 = new CalculatriceServices();
 
                     var expresionCompleja = cals2.Separer(expression);
-                    Console.WriteLine($"Resultado: {expresionCompleja.BaseExpression} = {expresionCompleja.Expression}");
+                    Console.WriteLine($"Resultado = {expresionCompleja.Expression}");
 
                     expression = FonctionConsole();
                 }
@@ -37,7 +37,7 @@ namespace Calculatrice
 
         private static string FonctionConsole()
         {
-            Console.WriteLine("Ajouter une fonction: ");
+            Console.WriteLine("\n Ajouter une fonction: ");
             return Console.ReadLine();
         }
 

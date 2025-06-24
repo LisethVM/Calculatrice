@@ -15,7 +15,7 @@ namespace Calculatrice.Services
         public ExpressionComplexeModel Separer(string expression)
         {
             expression = expression.Trim();
-            expression = expression.Replace(".", ",");
+            expression = expression.Replace(".", ",").Replace(" ", "");
             
             ExpressionComplexeModel expressionComplexe = new ExpressionComplexeModel(expression, 0, expression.Length - 1, []);
             expressionComplexe.SousOperations = SeparerSousOperations(expressionComplexe);
@@ -82,11 +82,11 @@ namespace Calculatrice.Services
             {
                 EvaluerSousOperations(sousOperation);
             }
-            // Il fait l'evaluation du chaque sous-operation
-            Console.WriteLine("");
 
+            // Evaluer chaque sous-operation
             var tokens = TokeniseurServices.Tokeniser(noeud.Expression);
             var valeurs = new List<object>();
+
             // fait le trajet du tokens
             foreach (var tok in tokens)
             {
