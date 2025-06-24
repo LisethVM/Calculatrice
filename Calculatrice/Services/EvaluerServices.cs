@@ -30,7 +30,7 @@ namespace Calculatrice.Services
                     operation = character;
                 }
                 else if (valActuelle == 0)
-                { 
+                {
                     valActuelle = Convert.ToDouble(item);
                 }
 
@@ -39,6 +39,7 @@ namespace Calculatrice.Services
                     valOperation = Convert.ToDouble(item);
 
                     valActuelle = Evaluer(valActuelle, valOperation, operation);
+
                 }
             }
             return valActuelle;
@@ -60,13 +61,14 @@ namespace Calculatrice.Services
                     break;
                 case DIVISION:
                     if (valOperation == 0)
-                        throw new MathException("Ce n'est pas possible le division pour 0");
+                        throw new Exception("Ce n'est pas possible le division pour 0");
                     valActuelle = valActuelle / valOperation;
                     break;
                 case PUISSANCE:
                     valActuelle = Math.Pow(valActuelle, valOperation);
                     break;
             }
+            valActuelle = Math.Round(valActuelle, 1);
             return valActuelle;
         }
 
@@ -75,7 +77,7 @@ namespace Calculatrice.Services
         {
             var solution = new List<object>();
             int i = 0;
-            
+
             while (i < tokens.Count)
             {
                 // Résout les opérations avec priorité 
@@ -84,7 +86,7 @@ namespace Calculatrice.Services
                     && (tokens[i + 1].ToString() == "^" || tokens[i + 1].ToString() == "*" || tokens[i + 1].ToString() == "/")
                     && tokens[i + 2] is double b)
                 {
-                    
+
                     double parcial = Evaluer(a, b, char.Parse(tokens[i + 1].ToString()));
                     solution.Add(parcial);
                     i += 3;

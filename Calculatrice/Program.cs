@@ -11,15 +11,34 @@ namespace Calculatrice
     {
         static void Main()
         {
-            Console.WriteLine("Calculatrice pro 1.0");
-            
-            string expression = "-5+((sqrt(5^2)*3)+(10/5))"; //"-5+((sqrt(5^2)*3)+(10/5))"; (15)+(2) -- -5+(15)
+            Console.WriteLine("Calculatrice EZO");
 
-            CalculatriceServices cals2 = new CalculatriceServices();
+            //string expression = "2.8*3-1"; 
+            string expression = FonctionConsole();
 
-            var expresionCompleja = cals2.Separer(expression);
-            Console.WriteLine($"Resultado: {expresionCompleja.BaseExpression} = {expresionCompleja.Expression}");
+            while (expression != "" && expression.ToLower() != "Quitter")
+            {
+                try
+                {
+                    CalculatriceServices cals2 = new CalculatriceServices();
 
+                    var expresionCompleja = cals2.Separer(expression);
+                    Console.WriteLine($"Resultado: {expresionCompleja.BaseExpression} = {expresionCompleja.Expression}");
+
+                    expression = FonctionConsole();
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine("Ce n'est pas possible le division pour 0 main");
+                    expression = FonctionConsole();
+                }
+            }
+        }
+
+        private static string FonctionConsole()
+        {
+            Console.WriteLine("Ajouter une fonction: ");
+            return Console.ReadLine();
         }
 
     }

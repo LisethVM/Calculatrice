@@ -83,7 +83,7 @@ namespace Calculatrice.Services
                 EvaluerSousOperations(sousOperation);
             }
             // Il fait l'evaluation du chaque sous-operation
-            Console.WriteLine(noeud.Expression);
+            Console.WriteLine("");
 
             var tokens = TokeniseurServices.Tokeniser(noeud.Expression);
             var valeurs = new List<object>();

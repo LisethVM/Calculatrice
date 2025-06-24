@@ -29,17 +29,15 @@ namespace Calculatrice.Services
                     continue;
                 }
 
-                // Función o identificador: comienza con letra
                 if (char.IsLetter(c))
                 {
-                    // Acumular nombre de función
                     buffer.Clear();
                     while (i < expression.Length && char.IsLetter(expression[i]))
                     {
                         buffer.Append(expression[i]);
                         i++;
                     }
-                    // Si viene un paréntesis, tomamos hasta cerrar
+                    // Il prende une parenthèse jusqu'à sa fermeture
                     if (i < expression.Length && expression[i] == '(')
                     {
                         int nivelParentesis = 0;
@@ -51,7 +49,7 @@ namespace Calculatrice.Services
                             i++;
                         } while (i < expression.Length && nivelParentesis > 0);
                     }
-                    // Decrementar i para no saltarnos el próximo carácter procesable
+                    
                     i--;
 
                     tokens.Add(buffer.ToString());
@@ -59,15 +57,14 @@ namespace Calculatrice.Services
                     continue;
                 }
 
-                // Dígito o punto decimal: parte de número
-                if (char.IsDigit(c) || c == '.')
+                // Evaluation des nombres décimaux ou de plus 2 chiffres 
+                if (char.IsDigit(c) || c == ',')
                 {
-                    // Si buffer no contiene sólo el signo '-', limpiarlo
                     if (!(buffer.Length == 1 && buffer[0] == '-'))
                     {
                         buffer.Clear();
                     }
-                    while (i < expression.Length && (char.IsDigit(expression[i]) || expression[i] == '.'))
+                    while (i < expression.Length && (char.IsDigit(expression[i]) || expression[i] == ','))
                     {
                         buffer.Append(expression[i]);
                         i++;
@@ -78,13 +75,12 @@ namespace Calculatrice.Services
                     continue;
                 }
 
-                // Si hay un buffer residual, limpiarlo (seguridad)
+                // Nettogaye du buffer résiduel 
                 if (buffer.Length > 0)
                 {
                     buffer.Clear();
                 }
 
-                // Operadores y paréntesis como tokens individuales
                 if ("+-*/^()".IndexOf(c) >= 0)
                 {
                     tokens.Add(c.ToString());
